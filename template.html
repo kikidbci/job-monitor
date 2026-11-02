@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ofertas: US tax y contabilidad</title>
+<style>
+:root{--bg:#fff;--fg:#1a1a1a;--mut:#6b6b6b;--card:#f6f6f3;--line:#e3e3dd;--acc:#0a5cff;--pri:#b4231a}
+@media (prefers-color-scheme:dark){:root{--bg:#141414;--fg:#ececec;--mut:#9b9b9b;--card:#1d1d1d;--line:#333;--acc:#6ea8ff;--pri:#ff7b72}}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.45 system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--fg)}
+main{max-width:860px;margin:0 auto;padding:20px 14px 60px}
+h1{font-size:1.3rem;margin:0 0 4px}
+.sub{color:var(--mut);font-size:.85rem;margin-bottom:14px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+input[type=search]{flex:1 1 220px;padding:9px 11px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--fg);font:inherit}
+button{padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--fg);font:inherit;cursor:pointer}
+button.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.card{display:block;padding:12px 14px;margin-bottom:8px;background:var(--card);border:1px solid var(--line);border-radius:10px;color:inherit;text-decoration:none}
+.card:hover{border-color:var(--acc)}
+.t{font-weight:600}
+.m{color:var(--mut);font-size:.85rem;margin-top:2px}
+.pri{color:var(--pri);font-weight:700;font-size:.78rem;letter-spacing:.04em}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+td,th{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left}
+td.n{text-align:right;font-variant-numeric:tabular-nums}
+.empty{color:var(--mut);padding:30px 0;text-align:center}
+</style>
+</head>
+<body>
+<main>
+<h1>Ofertas: US tax y contabilidad</h1>
+<div class="sub" id="sub"></div>
+<div class="bar">
+  <input type="search" id="q" placeholder="Buscar empresa, puesto o ciudad">
+  <button id="bJobs" class="on">Ofertas</button>
+  <button id="bCo">Empresas</button>
+  <button id="bUS">Solo US tax</button>
+  <button id="bAg" style="display:none">Ocultar intermediarias</button>
+</div>
+<div id="out"></div>
+</main>
+<script>
+const D = /*DATA*/null;
+let tab = "jobs", onlyUS = false, hideAg = false;
+const $ = id => document.getElementById(id);
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined) e.textContent = text; return e; };
+const safe = u => /^https?:\/\//i.test(u) ? u : "#";
+
+function render() {
+  const q = $("q").value.trim().toLowerCase();
+  const out = $("out"); out.replaceChildren();
+  $("bJobs").classList.toggle("on", tab === "jobs");
+  $("bCo").classList.toggle("on", tab === "co");
+  $("bUS").classList.toggle("on", onlyUS);
+  $("bAg").classList.toggle("on", hideAg);
+  $("bUS").style.display = tab === "jobs" ? "" : "none";
+  $("bAg").style.display = tab === "co" ? "" : "none";
+  if (tab === "jobs") {
+    const rows = D.jobs.filter(j => (!onlyUS || j.tier === "priority") &&
+      (!q || (j.company + " " + j.title + " " + j.location).toLowerCase().includes(q)));
+    if (!rows.length) { out.append(el("div", "empty", "Sin ofertas con estos filtros.")); return; }
+    for (const j of rows.slice(0, 300)) {
+      const a = el("a", "card"); a.href = safe(j.url); a.target = "_blank"; a.rel = "noopener noreferrer";
+      if (j.tier === "priority") a.append(el("div", "pri", "US TAX"));
+      a.append(el("div", "t", j.title));
+      a.append(el("div", "m", [j.company, j.location, j.salary, "vista " + j.first_seen].filter(Boolean).join(" · ")));
+      out.append(a);
+    }
+  } else {
+    const rows = D.companies.filter(c => (!hideAg || !c.agency) && (!q || c.name.toLowerCase().includes(q)));
+    if (!rows.length) { out.append(el("div", "empty", "Aún no hay datos de empresas.")); return; }
+    const t = el("table"), h = el("tr");
+    for (const x of ["#", "Empresa", "Puestos"]) h.append(el("th", "", x));
+    t.append(h);
+    rows.forEach((c, i) => {
+      const r = el("tr");
+      r.append(el("td", "", String(i + 1)), el("td", "", c.name + (c.agency ? " (intermediaria)" : "")), el("td", "n", String(c.total)));
+      t.append(r);
+    });
+    out.append(t);
+  }
+}
+$("sub").textContent = "Actualizado " + D.updated + " · " + D.jobs.length + " ofertas guardadas";
+$("q").oninput = render;
+$("bJobs").onclick = () => { tab = "jobs"; render(); };
+$("bCo").onclick = () => { tab = "co"; render(); };
+$("bUS").onclick = () => { onlyUS = !onlyUS; render(); };
+$("bAg").onclick = () => { hideAg = !hideAg; render(); };
+render();
+</script>
+</body>
+</html>
