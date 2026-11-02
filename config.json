@@ -1,111 +1,12 @@
 {
-  "keywords_priority": [
-    "us tax",
-    "u.s. tax",
-    "usa tax",
-    "us individual",
-    "us expat",
-    "us corporate",
-    "expat",
-    "1040",
-    "5471",
-    "enrolled agent",
-    "cpa",
-    "tax desk",
-    "global mobility",
-    "movilidad internacional",
-    "international tax",
-    "fiscalidad internacional",
-    "estados unidos",
-    "eeuu",
-    "ee.uu"
-  ],
-  "keywords_any": [
-    "tax",
-    "fiscal",
-    "tribut",
-    "impuesto",
-    "contab",
-    "accounting",
-    "accountant",
-    "bookkeep",
-    "controller",
-    "controlling",
-    "accounts payable",
-    "accounts receivable",
-    "cuentas a pagar",
-    "cuentas a cobrar",
-    "payroll",
-    "nómina",
-    "nomina",
-    "tesorer",
-    "audit"
-  ],
-  "keywords_exclude": [
-    "re:\\bintern\\b",
-    "internship",
-    "prácticas",
-    "practicas",
-    "becario",
-    "beca ",
-    "trainee",
-    "graduate program",
-    "administrativ",
-    "auxiliar"
-  ],
-  "locations_any": [
-    "madrid",
-    "remot",
-    "teletrabajo",
-    "españa",
-    "spain",
-    "híbrido",
-    "hibrido"
-  ],
+  "keywords_priority": ["us tax", "u.s. tax", "usa tax", "us individual", "us expat", "us corporate", "expat", "1040", "5471", "enrolled agent", "cpa", "tax desk", "global mobility", "movilidad internacional", "international tax", "fiscalidad internacional", "estados unidos", "eeuu", "ee.uu"],
+  "keywords_any": ["tax", "fiscal", "tribut", "impuesto", "contab", "accounting", "accountant", "bookkeep", "controller", "controlling", "accounts payable", "accounts receivable", "cuentas a pagar", "cuentas a cobrar", "payroll", "nómina", "nomina", "tesorer", "audit"],
+  "keywords_exclude": ["re:\\bintern\\b", "internship", "prácticas", "practicas", "becario", "beca ", "trainee", "graduate program", "administrativ", "auxiliar"],
+  "locations_any": ["madrid", "remot", "teletrabajo", "españa", "spain", "híbrido", "hibrido"],
   "min_salary_eur": 40000,
   "min_salary_usd": 40000,
+  "agencias": ["adecco", "manpower", "randstad", "page personnel", "michael page", "hays", "robert walters", "experis", "grupo crit", "faster empleo", "gi group", "synergie"],
   "companies": [
-    {
-      "ats": "html",
-      "name": "Garrigues",
-      "url": "https://www.garrigues.com/es_ES/trabaja-con-nosotros/oportunidades-profesionales",
-      "link_contains": "/oportunidades-profesionales/"
-    },
-    {
-      "ats": "adzuna",
-      "name": "Adzuna · US tax España",
-      "country": "es",
-      "what_or": "us tax eeuu estados unidos expat 1040 cpa global mobility",
-      "pages": 3,
-      "max_days_old": 30
-    },
-    {
-      "ats": "adzuna",
-      "name": "Adzuna · contabilidad Madrid",
-      "country": "es",
-      "where": "Madrid",
-      "what_or": "contable contabilidad accountant controller fiscal impuestos tributario nóminas payroll",
-      "pages": 4,
-      "max_days_old": 14
-    }
-  ],
-  "agencias": [
-    "adecco",
-    "manpower",
-    "randstad",
-    "page personnel",
-    "michael page",
-    "hays",
-    "robert walters",
-    "experis",
-    "grupo crit",
-    "crit ",
-    "faster empleo",
-    "gi group",
-    "synergie",
-    "kelly",
-    "talentia",
-    "adia",
-    "ettsa"
+    {"ats": "html", "name": "Garrigues", "url": "https://www.garrigues.com/es_ES/trabaja-con-nosotros/oportunidades-profesionales", "link_contains": "/oportunidades-profesionales/"}
   ]
 }
